@@ -78,11 +78,17 @@ component extends="farcry.plugins.testMXUnit.tests.FarcryTestCase" {
 
 	public void function testRegisterLess() {
 		// assert that the key does not exist in the struct
-		assertFalse(structKeyExists(application.stPlugins["farcryless"].stLessLibraries, "test"));
+		assertFalse(structKeyExists(application.stPlugins["farcryless"].stLessLibraries, "test"), "Library already existed, test aborted");
 		// register a less library
-		variables.less.registerLess(id = "test");
+		variables.less.registerLess(id = "test", baseHref="/my/fake/path", lFiles = "file.less", append = "", prepend = "");
 		// assert that the key exists in the struct
-		assertTrue(structKeyExists(application.stPlugins["farcryless"].stLessLibraries, "test"));
+		assertTrue(structKeyExists(application.stPlugins["farcryless"].stLessLibraries, "test"), "Library did not exist");
+
+		// assert the hash exists and is correct
+		assertTrue(structKeyExists(application.stPlugins["farcryless"].stLessLibraries["test"],"hash"),"Hash key did not exist in library");
+		var expectedhash = hash("/my/fake/pathfile.less","md5","utf-8");
+		var actualhash = application.stPlugins["farcryless"].stLessLibraries["test"].hash;
+		assertEquals(expectedhash, actualhash,"Hashes did not match");
 	}
 
 	public void function testUnregisterLess() {

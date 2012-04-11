@@ -10,7 +10,9 @@ component {
 		if (len(arguments.lFiles)) {
 			arguments.lFullFilebaseHREFs = application.fc.utils.normaliseFileList(arguments.baseHREF,arguments.lFiles);
 		}
-		application.stPlugins.farcryless.stLessLibraries[arguments.id] = duplicate(arguments);
+		var library = duplicate(arguments);
+		library.hash = createLibraryHash(library = arguments);
+		application.stPlugins.farcryless.stLessLibraries[arguments.id] = library;
 		return application.fapi.success("Less library added");
 	}
 
@@ -288,6 +290,10 @@ component {
 		newStr = reReplaceNoCase(newStr, "(^_|_$)","","ALL");
 
 		return newStr;
+	}
+
+	public string function createLibraryHash(required struct library) {
+		return hash(arguments.library.baseHref & arguments.library.lFiles & arguments.library.append & arguments.library.prepend, "md5", "utf-8");
 	}
 
 }

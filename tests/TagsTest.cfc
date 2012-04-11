@@ -89,4 +89,26 @@
 
 	</cffunction>
 
+	<cffunction name="testHashCheck" output="false" returntype="void" access="public">
+
+		<!--- run the tag, w/o registering, verify exists, note hash --->
+		<less:loadLess id="test" baseHref="#expandPath('/farcry/plugins/farcryless/tests/data')#" lFiles="test.less" outputDir="/less-output-test" />
+		<cfset var originalHash = application.stPlugins["farcryless"].stLessLibraries["test"].hash />
+
+		<!--- run again, keep the same definition, note hash --->
+		<less:loadLess id="test" baseHref="#expandPath('/farcry/plugins/farcryless/tests/data')#" lFiles="test.less" outputDir="/less-output-test" />
+		<cfset var anotherHash = application.stPlugins["farcryless"].stLessLibraries["test"].hash />
+
+		<!--- compare hashes, if different, fail --->
+		<cfset assertEquals(originalHash, anotherHash) />
+
+		<!--- run again, change the definition but keep the same ID, note hash --->
+		<less:loadLess id="test" baseHref="#expandPath('/farcry/plugins/farcryless/tests/data/alt')#" lFiles="test.less" outputDir="/less-output-test" />
+		<cfset var newHash = application.stPlugins["farcryless"].stLessLibraries["test"].hash />
+
+		<!--- compare hashes, if they are the same, fail --->
+		<cfset assertNotEquals(originalHash, newHash) />
+
+	</cffunction>
+
 </cfcomponent>

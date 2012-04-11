@@ -34,6 +34,14 @@
 
 	<cfset less = application.stPlugins["farcryless"].less />
 
+	<!--- if the baseHref, lFiles, prepend or append arguments are specified, check the hash --->
+	<cfif len(trim(attributes.baseHref)) or len(trim(attributes.lFiles)) or len(trim(attributes.prepend)) or len(trim(attributes.append))>
+		<cfif not structKeyExists(stLess,"hash") or (stLess.hash neq less.createLibraryHash(library = attributes))>
+			<!--- unregister the library which will trigger a new registration --->
+			<cfset less.unregisterLess(stLess.id) />
+		</cfif>
+	</cfif>
+
 	<cfif len(stLess.id) and less.isRegistered(stLess.id)>
 		<cfset stLess = less.getLibrary(stLess.id) />
 	<cfelseif len(stLess.id)>
