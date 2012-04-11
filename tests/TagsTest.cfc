@@ -8,6 +8,10 @@
 			"stLessLibraries" = {},
 			"less" = createObject("component","farcry.plugins.farcryless.packages.custom.less")
 		};
+		variables.testOutputDir = expandPath(application.fapi.getwebroot() & '/') & 'less-output-test';
+		if (directoryExists(variables.testOutputDir)) {
+			directoryDelete(variables.testOutputDir, true);
+		}
 		super.setup();
 		</cfscript>
 	</cffunction>
@@ -84,7 +88,7 @@
 		var key = structKeyList(application.stPlugins["farcryless"].stLessLibraries);
 		assertTrue(structKeyExists(application.stPlugins["farcryless"].stLessLibraries[key], 'compiled'));
 		assertEquals(fileRead(expandPath('/farcry/plugins/farcryless/tests/data/expected.css')),application.stPlugins["farcryless"].stLessLibraries[key].compiled.append);
-		assertEquals(fileRead(expandPath('/farcry/plugins/farcryless/tests/data/expected.css')),fileRead(expandPath(application.fapi.getwebroot() & '/') & '/less-output-test/' & key & '/test.css'));
+		assertEquals(fileRead(expandPath('/farcry/plugins/farcryless/tests/data/expected.css')),fileRead(variables.testOutputDir & '/' & key & '/test.css'));
 		</cfscript>
 
 	</cffunction>
