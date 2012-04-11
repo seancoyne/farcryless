@@ -219,4 +219,14 @@ component extends="farcry.plugins.testMXUnit.tests.FarcryTestCase" {
 
 	}
 
+	public void function testBootstrapCompile() {
+		// bootstrap is a large LESS implementation, its a good case for a compile test
+		var srcPath = expandPath('/farcry/plugins/farcryless/tests/data/bootstrap/less/bootstrap.less');
+		makePublic(variables.less,"compileLessFile");
+
+		var expected = fileRead(expandPath('/farcry/plugins/farcryless/tests/data/expected.bootstrap.css'));
+		var actual = variables.less.compileLessFile(srcPath);
+		assertEquals(expected, actual);
+	}
+
 }
