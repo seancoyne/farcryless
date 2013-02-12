@@ -10,8 +10,8 @@ This plugin for the [FarCry](http://www.farcrycore.org/) framework allows you to
 
 * [ColdFusion 9.0.1+](http://www.adobe.com/go/coldfusion) or [Railo 3.3.2+](http://getrailo.org/)
 * [FarCry 6.1.4+](http://www.farcrycore.org/)
-* [Less CSS Engine 1.3.1](http://www.asual.com/lesscss/) (included)
-* [Mozilla Rhino 1.7R3](http://www.mozilla.org/rhino/) (included)
+* [Less CSS Engine 1.3.3](http://www.asual.com/lesscss/) (included)
+* [Mozilla Rhino 1.7R4](http://www.mozilla.org/rhino/) (included)
 
 ## Installation
 

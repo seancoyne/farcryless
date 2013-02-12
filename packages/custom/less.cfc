@@ -252,7 +252,7 @@ component {
 	*/
 	private any function compileLess(required string less, boolean compress = false) {
 		var lessEngine = getLessEngine();
-		return lessEngine.compile(javacast('string', arguments.less), javacast('boolean', arguments.compress));
+		return lessEngine.compile(javacast('string', arguments.less), javacast('null', ""), javacast('boolean', arguments.compress));
 	}
 
 	// helper methods
@@ -260,7 +260,7 @@ component {
 	private any function getJavaLoader() {
 		if (!structKeyExists(application.stPlugins["farcryless"],"javaloader")) {
 			var paths = [
-				expandPath('/farcry/plugins/farcryless/packages/custom/lib/lesscss-engine-1.3.1.jar'),
+				expandPath('/farcry/plugins/farcryless/packages/custom/lib/lesscss-engine-1.3.3.jar'),
 				expandPath('/farcry/plugins/farcryless/packages/custom/lib/js.jar')
 			];
 			application.stPlugins["farcryless"].javaloader = createObject("component","farcry.core.packages.farcry.javaloader.JavaLoader").init(
