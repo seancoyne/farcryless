@@ -243,5 +243,24 @@ component extends="farcry.plugins.testMXUnit.tests.FarcryTestCase" {
 		assertEquals(expected, actual);
 
 	}
+	
+	public void function testBootstrap232Compile() {
+
+		// bootstrap is a large LESS implementation, its a good case for a compile test
+		var srcPath = expandPath('/farcry/plugins/farcryless/tests/data/bootstrap-2.3.2/less/bootstrap.less');
+		makePublic(variables.less,"compileLessFile");
+
+		// compile bootstrap
+		var expected = fileRead(expandPath('/farcry/plugins/farcryless/tests/data/expected.bootstrap-2.3.2.css'));
+		var actual = variables.less.compileLessFile(srcPath);
+		assertEquals(trim(expected), trim(actual), "Bootstrap Compile did not match");
+
+		// compile responsive.less
+		srcPath = expandPath('/farcry/plugins/farcryless/tests/data/bootstrap-2.3.2/less/responsive.less');
+		actual = variables.less.compileLessFile(srcPath);
+		expected = fileRead(expandPath('/farcry/plugins/farcryless/tests/data/expected.responsive-2.3.2.css'));
+		assertEquals(trim(expected), trim(actual), "Responsive Compile did not match");
+
+	}
 
 }
