@@ -1,0 +1,56 @@
+<cfadmin
+	action="updateMapping"
+	type="server"
+	password="vagrant"
+	physical="/var/www/farcry"
+	toplevel="true"
+	virtual="/farcry"
+	archive=""
+	primary="true">
+
+<cfadmin
+	action="updateMapping"
+	type="server"
+	password="vagrant"
+	physical="/var/www/farcry/core/webtop"
+	toplevel="true"
+	virtual="/webtop"
+	archive=""
+	primary="true">		
+
+<cfadmin
+	action="updateMapping"
+	type="server"
+	password="vagrant"
+	physical="/var/www/farcry/plugins/testMXUnit/www/mxunit"
+	toplevel="true"
+	virtual="/mxunit"
+	archive=""
+	primary="true">	
+
+<cfadmin
+	action="updateDatasource"
+	type="server"
+	password="vagrant"
+	classname="org.gjt.mm.mysql.Driver"
+	dsn="jdbc:mysql://{host}:{port}/{database}"
+	newname="chelsea"
+	name="chelsea"
+	host="localhost"
+	database="farcryless_test"
+	port="3306"
+	dbusername="vagrant"
+	dbpassword="vagrant"
+	connectionLimit="500"
+	connectionTimeout="60"
+	blob="false"
+	clob="true"
+	allowed_select="true"
+	allowed_insert="true"
+	allowed_update="true"
+	allowed_delete="true"
+	allowed_alter="true"
+	allowed_drop="true"
+	allowed_revoke="true"
+	allowed_create="true"
+	allowed_grant="true">

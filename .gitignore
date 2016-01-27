@@ -1,2 +1,6 @@
 *.iml
 .idea
+tmp
+.vagrant
+chef/cache
+chef/cookbooks
